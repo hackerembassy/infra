@@ -4,16 +4,22 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     terranix.url = "github:terranix/terranix";
     deploy-rs.url = "github:serokell/deploy-rs";
+    printer-anette = {
+      url = "github:hackerembassy/printer-anette";
+      flake = false;
+    };
     home-manager.url = "github:nix-community/home-manager";
   };
 
-  outputs = inputs@{ self, nixpkgs, terranix, deploy-rs, home-manager }:
+  outputs = inputs@{ self, nixpkgs, terranix, deploy-rs, home-manager, ... }:
     with builtins; let
       nixpkgsPatches = [
-        (builtins.fetchurl {
-          url = "https://github.com/NixOS/nixpkgs/pull/188273.diff";
-          sha256 = "03jjafnyvcd4kncg1hsc7chivd542l0s6jv6q9sfrrjf19ab3wba";
-        })
+        # (builtins.fetchurl {
+        #   url = "https://github.com/NixOS/nixpkgs/pull/188273.diff";
+        #   sha256 = "10i8lzlldfjab773bbzscsxsa4mbb0jyvhzrcp0kmlwzc4wnwnbb";
+        # })
+        ./klipper.diff
+        ./moonraker.diff
       ];
 
       nixpkgsPatched = mapAttrs (sys: { applyPatches, ... }:
@@ -56,7 +62,7 @@
       specialArgs = { inherit inputs; prelude = import common/prelude.nix; };
       buildConfig = system: modules: { inherit modules system specialArgs; };
       buildSystem = system: modules:
-        lib.nixosSystem (buildConfig system modules);
+        nixpkgsPatched.${system}.lib.nixosSystem (buildConfig system modules);
       deployNixos = s: deploy-rs.lib.${s.pkgs.system}.activate.nixos s;
       deployHomeManager = sys: s: deploy-rs.lib.${sys}.activate.home-manager s;
 
@@ -90,7 +96,7 @@
     in
     {
 
-      inherit nixpkgs';
+      inherit nixpkgs' nixpkgsPatched;
 
       packages = onShellPkgs (system: pkgs: {
         terraform-config = terranix.lib.terranixConfiguration {

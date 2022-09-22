@@ -165,11 +165,28 @@
         "type": "github"
       }
     },
+    "printer-anette": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1663863432,
+        "narHash": "sha256-H3EKH02iQoDICCTzgALAJkR8sbFD3S2/OgCfqGOVRds=",
+        "owner": "hackerembassy",
+        "repo": "printer-anette",
+        "rev": "bd71b6f132fcbd039446e915b099cdf7f4737794",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hackerembassy",
+        "repo": "printer-anette",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "deploy-rs": "deploy-rs",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_3",
+        "printer-anette": "printer-anette",
         "terranix": "terranix"
       }
     },

@@ -1,0 +1,24 @@
+diff --git a/nixos/modules/services/misc/moonraker.nix b/nixos/modules/services/misc/moonraker.nix
+index f3c78df0cc0..ec752b20d1f 100644
+--- a/nixos/modules/services/misc/moonraker.nix
++++ b/nixos/modules/services/misc/moonraker.nix
+@@ -123,7 +123,11 @@ in {
+           host = cfg.address;
+           port = cfg.port;
+           klippy_uds_address = cfg.klipperSocket;
++        };
++        file_manager = {
+           config_path = cfg.configDir;
++        };
++        database = {
+           database_path = "${cfg.stateDir}/database";
+         };
+       };
+@@ -153,6 +157,7 @@ in {
+ 
+       serviceConfig = {
+         WorkingDirectory = cfg.stateDir;
++        PrivateTmp = true;
+         Group = cfg.group;
+         User = cfg.user;
+       };
