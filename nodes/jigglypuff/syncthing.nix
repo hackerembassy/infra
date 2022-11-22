@@ -11,10 +11,10 @@
     };
 
     folders = {
-      "/var/lib/klipper-files" = {
-        id = "anette-files";
-        devices = with builtins; attrNames (config.services.syncthing.devices);
-      };
+      # "/var/lib/klipper-files" = {
+      #   id = "anette-files";
+      #   devices = with builtins; attrNames (config.services.syncthing.devices);
+      # };
     };
   };
 

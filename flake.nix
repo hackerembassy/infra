@@ -18,8 +18,8 @@
         #   url = "https://github.com/NixOS/nixpkgs/pull/188273.diff";
         #   sha256 = "10i8lzlldfjab773bbzscsxsa4mbb0jyvhzrcp0kmlwzc4wnwnbb";
         # })
-        ./klipper.diff
-        ./moonraker.diff
+        # ./klipper.diff
+        # ./moonraker.diff
       ];
 
       nixpkgsPatched = mapAttrs (sys: { applyPatches, ... }:
