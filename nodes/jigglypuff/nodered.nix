@@ -3,9 +3,11 @@
 {
 
   services.node-red = {
-    enable = true;
+    # enable = true;
   };
   services.mosquitto  = {
+    settings = {
+    };
     enable = true;
     listeners = [
       {

@@ -1,10 +1,10 @@
-{ config, pkgs, prelude, ... }@args: with prelude args;
+{ config, pkgs, prelude, ... }@args: let
+  on = { enable = true; };
+in
 
 # Klipper and stuff around it.
 
 {
-
-  boot.kernelPackages = pkgs.linuxPackages-rt;
 
   users.users.klipper = {
     isSystemUser = true;
@@ -17,12 +17,12 @@
   services.klipper = on // {
     user = "klipper";
     group = "klipper";
-    configFile = "${args.inputs.printer-anette}/config.cfg";
+    configFile = ./printer.cfg;
     mutableConfig = true;
     firmwares = {
       anette = on // {
         serial = "/dev/serial/by-id/usb-Klipper_lpc1769_12345-if00";
-        configFile = "${args.inputs.printer-anette}/.config";
+        configFile = ./.config;
       };
     };
   };

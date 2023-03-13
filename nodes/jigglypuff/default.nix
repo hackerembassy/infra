@@ -1,9 +1,11 @@
 { config, inputs, ... }: {
 
   imports = [
-    ./syncthing.nix
+    #./syncthing.nix
+    #./hass.nix
     "${inputs.self}/modules/home-manager"
-    "${inputs.self}/modules/sway/system.nix"
+    "${inputs.self}/modules/core.nix"
+    # "${inputs.self}/modules/sway/system.nix"
   ];
 
   networking.firewall.enable = false;
@@ -11,7 +13,9 @@
   _.user = "user";
 
   home-manager.users.user = {
-    imports = [ "${inputs.self}/modules/sway/core.nix" ];
+    imports = [
+      # "${inputs.self}/modules/sway/core.nix"
+    ];
     home.keyboard = {
       layout = config.services.xserver.layout;
       options = with builtins;

@@ -1,4 +1,4 @@
 {
     arch = "x86_64-linux";
-    hostname = "jigglypuff";
+    hostname = "jigglypuff-gzut0y97.hacker-embassy.keter";
 }

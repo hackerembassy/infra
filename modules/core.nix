@@ -21,7 +21,6 @@ with prelude args; {
     settings = {
       trusted-users = [ "root" config._.user ];
       experimental-features = [ "nix-command" "flakes" "ca-derivations" ];
-      substituters = [ "https://hydra.nixos.org?want-mass-query=1" ];
     };
 
     nixPath = [ "nixpkgs=${pkgs.path}" ];
@@ -38,7 +37,7 @@ with prelude args; {
   };
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_testing;
+    kernelPackages = pkgs.lib.mkDefault pkgs.linuxPackages_testing;
     plymouth = on;
     kernelParams = [ "quiet" ];
   };

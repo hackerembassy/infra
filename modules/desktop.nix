@@ -114,14 +114,13 @@ with prelude args; {
   hardware = {
     opengl = on;
     bluetooth = on;
-    opentabletdriver = on;
   };
 
   programs = enableThings [
     "light" # brightness control
   ] { };
 
-  powerManagement.powertop.enable = lib.mkDefault true;
+  services.tlp.enable = lib.mkDefault true;
 
   environment.systemPackages = with pkgs; [
     dconf

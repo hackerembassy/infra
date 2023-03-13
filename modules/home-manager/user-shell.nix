@@ -24,6 +24,8 @@ with prelude args;
 
     keychain = onWithShell // {
       agents = [ "gpg" "ssh" ];
+      keys = [];
+      inheritType = "any";
     };
 
     # Too damn verbose!

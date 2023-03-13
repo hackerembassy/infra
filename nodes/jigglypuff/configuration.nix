@@ -26,6 +26,8 @@
 
   services.pipewire.enable = true;
 
+  programs.atop.enable = true;
+
   documentation.enable = false;
 
   environment.systemPackages = with pkgs; [
