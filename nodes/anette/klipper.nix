@@ -61,4 +61,11 @@ in
     };
   };
 
+  systemd.services.webcam = {
+    serviceConfig = {
+      ExecStart = "${pkgs.ustreamer}/bin/ustreamer -f 15 -s 0";
+      Type = "forking";
+    };
+    enable = true;
+  };
 }
