@@ -20,9 +20,13 @@ in
     configFile = ./printer.cfg;
     mutableConfig = true;
     firmwares = {
-      anette = on // {
+      anette-main = on // {
         serial = "/dev/serial/by-id/usb-Klipper_lpc1769_12345-if00";
-        configFile = ./.config;
+        configFile = ./anette.main.config;
+      };
+      anette-ext = on // {
+        serial = "/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0";
+        configFile = ./anette.ext.config;
       };
     };
   };
