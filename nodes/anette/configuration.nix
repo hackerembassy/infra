@@ -61,6 +61,7 @@
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
+    neovim
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -75,6 +76,11 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+  services.udev.extraRules = ''
+    ## rule to restart klipper when the printer is connected via usb
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", ACTION=="add", RUN+="${pkgs.bash}/bin/sh -c '${pkgs.coreutils}/bin/echo RESTART > /run/klipper/tty'"
+  '';
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -93,6 +99,5 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.11"; # Did you read the comment?
-
 }
 
