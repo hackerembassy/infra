@@ -2,6 +2,9 @@
 remake-tf-config:
 	nix build .#terraform-config -Lv --offline --out-link ./terraform/config.tf.json
 
+switch:
+	nixos-rebuild switch -v --flake .#$* --target-host root@$*
+
 .PHONY: build-local
 build:
 	sudo nixos-rebuild switch --flake . -L

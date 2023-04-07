@@ -48,7 +48,7 @@ in
             "http://app.fluidd.xyz"
             "http://my.mainsail.xyz"
           ];
-          trusted_clients = [ "0.0.0.0/0" ];
+          trusted_clients = [ "0.0.0.0/0" "::0/0" ];
         };
         file_manager = {
           enable_object_processing = "False";
