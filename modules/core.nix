@@ -49,6 +49,16 @@ with prelude args; {
     avahi = on;
     fwupd = on;
 
+    logind = {
+      lidSwitch = "ignore";
+      lidSwitchExternalPower = "ignore";
+      extraConfig = ''
+        # IdleAction=lock
+        # IdleActionSec=30
+        HandlePowerKey=suspend
+      '';
+    };
+
     udev.extraRules = ''
     # GNUK token
     GROUPS=="wheel", ATTR{idVendor}=="234b", ATTR{idProduct}=="0000", ENV{ID_SMARTCARD_READER}="1", ENV{ID_SMARTCARD_READER_DRIVER}="gnupg"

@@ -61,16 +61,6 @@ with prelude args; {
 
     printing = on // { drivers = [ pkgs.gutenprint ]; };
 
-    logind = {
-      lidSwitch = "ignore";
-      lidSwitchExternalPower = "ignore";
-      extraConfig = ''
-        # IdleAction=lock
-        # IdleActionSec=30
-        HandlePowerKey=suspend
-      '';
-    };
-
     actkbd = on // {
       bindings = [
         {
