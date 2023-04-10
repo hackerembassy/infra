@@ -2,7 +2,7 @@
 
   imports = [
     #./syncthing.nix
-    #./hass.nix
+    ./hass.nix
     "${inputs.self}/modules/home-manager"
     "${inputs.self}/modules/core.nix"
     # "${inputs.self}/modules/sway/system.nix"

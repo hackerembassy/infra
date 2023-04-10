@@ -15,9 +15,9 @@
           unit_system = "metric";
           time_zone = "Asia/Yerevan";
         };
-        binary_sensor = [
-          { platform = "ffmpeg_motion"; input = "/dev/video2";  }
-        ];
+        #binary_sensor = [
+        #  { platform = "ffmpeg_motion"; input = "/dev/video2";  }
+        #];
         sensor = [
           { platform = "linux_battery"; }
         ];
@@ -31,9 +31,12 @@
       extraComponents = [
         "default_config"
         "analytics"
+	"backup"
+	"camera"
         "ipp"
         "ffmpeg"
         "ffmpeg_motion"
+	"ffmpeg_noise"
         "linux_battery"
         "esphome"
         "mpd"
@@ -42,6 +45,8 @@
         "frontend"
         "history"
         "mqtt"
+        "shelly"
+        "stream"
         "xiaomi"
         "xiaomi_ble"
         "bluetooth"
