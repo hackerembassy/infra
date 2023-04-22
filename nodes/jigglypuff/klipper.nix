@@ -4,7 +4,7 @@
 
 {
 
-  boot.kernelPackages = pkgs.linuxPackages-rt;
+#  boot.kernelPackages = pkgs.linuxPackages-rt;
 
   users.users.klipper = {
     isSystemUser = true;

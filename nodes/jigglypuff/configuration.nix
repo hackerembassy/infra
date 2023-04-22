@@ -6,7 +6,11 @@
 
 {
 
-  imports = [ ./default.nix ./klipper.nix ./nodered.nix ];
+  imports = [ 
+     ./default.nix 
+#     ./klipper.nix
+     ./nodered.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -32,6 +36,7 @@
 
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    nano
     wget
     zsh
   ];

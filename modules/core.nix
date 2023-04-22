@@ -65,7 +65,7 @@ with prelude args; {
     '';
 
     openssh = on // {
-      passwordAuthentication = false;
+      PasswordAuthentication = false;
     };
 
     xserver = {
@@ -93,7 +93,7 @@ with prelude args; {
     polkit = on;
     tpm2 = on;
   };
-
+  programs.zsh = on;
   environment.shells = [ pkgs.zsh ];
   environment.pathsToLink = [ "/share/zsh" ];
   environment.variables = {
