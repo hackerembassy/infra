@@ -65,7 +65,7 @@ with prelude args; {
     '';
 
     openssh = on // {
-      PasswordAuthentication = false;
+      passwordAuthentication = false;
     };
 
     xserver = {
