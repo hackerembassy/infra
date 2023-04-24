@@ -60,6 +60,7 @@
         "xiaomi_ble"
         "bluetooth"
 	"nut"
+	"rest"
       ];
 
 
