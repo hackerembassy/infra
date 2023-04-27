@@ -82,7 +82,7 @@
 
   services.udev.extraRules = ''
     ## rule to restart klipper when the printer is connected via usb ${pkgs.coreutils}/bin/echo RESTART > /run/klipper/tty; 
-    SUBSYSTEM=="usb", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", ACTION=="add", RUN+="${pkgs.bash}/bin/sh -c '${pkgs.systemd/bin/systemctl restart klipper}'"
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", ACTION=="add", RUN+="${pkgs.bash}/bin/sh -c '${pkgs.systemd}/bin/systemctl restart klipper'"
   '';
 
   # Open ports in the firewall.
