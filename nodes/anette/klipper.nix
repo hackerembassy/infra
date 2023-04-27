@@ -47,6 +47,7 @@ in
             "http://localhost"
             "http://app.fluidd.xyz"
             "http://my.mainsail.xyz"
+	    "http://le-fail.lan"
           ];
           trusted_clients = [ "0.0.0.0/0" "::0/0" ];
         };
