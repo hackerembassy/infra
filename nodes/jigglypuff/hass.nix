@@ -61,8 +61,14 @@
         "bluetooth"
 	"nut"
 	"rest"
+        "xiaomi_miio"
       ];
 
+
+     extraPackages = python3Packages: with python3Packages; [
+       # aqara-gw-support
+       paho-mqtt
+     ];
 
     };
 

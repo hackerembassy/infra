@@ -64,6 +64,7 @@
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     neovim
+    uhubctl
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -80,8 +81,8 @@
   services.openssh.enable = true;
 
   services.udev.extraRules = ''
-    ## rule to restart klipper when the printer is connected via usb
-    SUBSYSTEM=="usb", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", ACTION=="add", RUN+="${pkgs.bash}/bin/sh -c '${pkgs.coreutils}/bin/echo RESTART > /run/klipper/tty'"
+    ## rule to restart klipper when the printer is connected via usb ${pkgs.coreutils}/bin/echo RESTART > /run/klipper/tty; 
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", ACTION=="add", RUN+="${pkgs.bash}/bin/sh -c '${pkgs.systemd/bin/systemctl restart klipper}'"
   '';
 
   # Open ports in the firewall.

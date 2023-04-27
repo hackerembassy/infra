@@ -21,6 +21,15 @@
 
   boot.tmpOnTmpfs = true;
 
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-label/NIXOS_SD";
+      fsType = "ext4";
+      options = [ "noatime" ];
+    };
+  };
+
+
   fileSystems."/var/log" = {
 	fsType = "tmpfs";
 	options = [ "size=200M" ];
