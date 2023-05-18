@@ -32,6 +32,8 @@
 
       extraComponents = [
         "homekit"
+	"tts"
+	"google_translate"
 	"homekit_controller"
 	"apple_tv"
 	"bthome"
