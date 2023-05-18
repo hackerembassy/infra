@@ -32,9 +32,7 @@ in
     group = "klipper";
     address = "0.0.0.0";
     allowSystemControl = true;
-    configDir = "/var/lib/klipper";
     settings = {
-        server.enable_debug_logging = true;
         authorization = {
           cors_domains = [
             "http://${config.networking.hostName}"
@@ -44,6 +42,7 @@ in
             "http://app.fluidd.xyz"
             "http://my.mainsail.xyz"
 	    "http://le-fail.lan"
+	    "http://printer-anette.lan"
           ];
           trusted_clients = [ "0.0.0.0/0" "::0/0" ];
         };

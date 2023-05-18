@@ -9,6 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./users.nix
+      ./klipper.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -21,7 +22,7 @@
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
   # Set your time zone.
-  # time.timeZone = "Asia/Yerevan";
+  time.timeZone = "Asia/Yerevan";
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -76,19 +77,19 @@
   services.openssh = { 
       enable = true;
       settings.permitRootLogin = "yes";
-      settings.passwordAuthentication = false;
-  };
+      passwordAuthentication = false;
+};
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall.enable = false;
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
-  #system.copySystemConfiguration = true;
+  system.copySystemConfiguration = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
