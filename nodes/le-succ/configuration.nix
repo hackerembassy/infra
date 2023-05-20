@@ -2,14 +2,17 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
-
+{ config, lib, pkgs, ... }:
+let
+  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
+in
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./users.nix
       ./klipper.nix
+      (import "${home-manager}/nixos")
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -60,7 +63,6 @@
     wget
     neovim
     git
-    zsh
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -77,8 +79,8 @@
   services.openssh = { 
       enable = true;
       settings.permitRootLogin = "yes";
-      passwordAuthentication = false;
-};
+      settings.passwordAuthentication = false;
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -99,6 +101,10 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.11"; # Did you read the comment?
   
+  home-manager.users.keimoger = {
+    home.stateVersion = "22.11";
+  };
+
   programs.flashrom.enable = true;
   programs.zsh.enable = true;
 }
