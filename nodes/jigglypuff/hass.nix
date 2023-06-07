@@ -33,9 +33,12 @@
       extraComponents = [
         "homekit"
 	"tts"
+	"media_player"
+        "media_source"
 	"google_translate"
 	"homekit_controller"
 	"apple_tv"
+	"lifx"
 	"bthome"
 	"telegram"
 	"telegram_bot"
