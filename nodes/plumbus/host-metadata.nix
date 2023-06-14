@@ -1,4 +1,4 @@
 {
     arch = "aarch64-linux";
-    hostname = "anette.lan";
+    hostname = "plumbus.lan";
 }

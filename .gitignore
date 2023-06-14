@@ -1,2 +1,3 @@
 .direnv
 secrets
+.DS_Store
