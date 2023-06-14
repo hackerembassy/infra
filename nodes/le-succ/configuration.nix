@@ -62,6 +62,7 @@
     wget
     neovim
     git
+    ffmpeg_6-full
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -79,6 +80,16 @@
       enable = true;
       settings.permitRootLogin = "yes";
       settings.passwordAuthentication = false;
+  };
+
+  services.mediamtx = {
+      enable = true;
+      settings.paths = {
+        cam = {
+          runOnInit = "ffmpeg -f v4l2 -i /dev/video0 -f rtsp rtsp://localhost:$RTSP_PORT/$RTSP_PATH";
+          runOnInitRestart = true;
+        };
+      };
   };
 
   # Open ports in the firewall.
