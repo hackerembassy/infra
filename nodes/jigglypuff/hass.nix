@@ -67,6 +67,7 @@
 	"nut"
 	"rest"
         "xiaomi_miio"
+	"wyoming"
       ];
 
 
@@ -77,8 +78,24 @@
 
     };
 
-    # zigbee2mqtt = on // {
-    # };
+    zigbee2mqtt = on // {
+      settings = {
+        homeassistant = config.services.home-assistant.enable;
+	frontend = {
+	  auth_token = "!secrets.yaml auth_token";
+	};
+        mqtt = {
+	  server = "!secrets.yaml host";
+	  user = "!secrets.yaml user";
+	  password = "!secrets.yaml pass";
+        };
+	serial = {
+	  port = "/dev/serial/by-id/usb-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_4c1f564c8bc9eb11a2cf8d4f1d69213e-if00-port0";
+	};
+	advanced = {
+	  network_key = "!secrets.yaml netkey";
+	};};
+    };
 
   };
 
