@@ -92,6 +92,12 @@
       };
   };
 
+  systemd.services.mediamtx = {
+  	path = with pkgs; [
+        	ffmpeg
+	];
+  };
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
@@ -108,10 +114,10 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "22.11"; # Did you read the comment?
+  system.stateVersion = "23.05"; # Did you read the comment?
   
   home-manager.users.keimoger = {
-    home.stateVersion = "22.11";
+    home.stateVersion = "23.05";
   };
 
   programs.flashrom.enable = true;

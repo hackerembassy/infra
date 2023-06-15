@@ -60,10 +60,4 @@ in
       locations."/webcam".proxyPass = "http://127.0.0.1:8080/stream";
     };
   };
-
-  systemd.services.klippercam = {
-    script = "${pkgs.ustreamer}/bin/ustreamer -f 15 -s 0"; 
-    enable = true;
-    after = [ "network.target" ];
-  };
 }
