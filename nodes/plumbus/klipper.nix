@@ -48,6 +48,7 @@ in
             "http://app.fluidd.xyz"
             "http://my.mainsail.xyz"
 	    "http://le-fail.lan"
+	    "http://printer-plumbus.lan"
           ];
           trusted_clients = [ "0.0.0.0/0" "::0/0" ];
         };

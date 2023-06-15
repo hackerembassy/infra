@@ -65,6 +65,8 @@
     wget
     neovim
     uhubctl
+    ffmpeg
+    gphoto2
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
