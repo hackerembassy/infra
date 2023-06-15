@@ -86,11 +86,13 @@
       enable = true;
       settings.paths = {
         cam = {
-          runOnInit = "ffmpeg -f v4l2 -i /dev/video0 -f rtsp rtsp://localhost:$RTSP_PORT/$RTSP_PATH";
+          runOnInit = "ffmpeg -init_hw_device qsv=hw -filter_hw_device hw -hwaccel qsv -c:v mjpeg_qsv -hwaccel_output_format qsv -f v4l2 -input_format mjpeg -video_size 1600x1200 -framerate 15 -i /dev/video0 -vf 'hwupload=extra_hw_frames=10' -c:v h264_qsv -profile baseline -b:v 2M -g 15 -f rtsp rtsp://localhost:$RTSP_PORT/$RTSP_PATH";
           runOnInitRestart = true;
         };
       };
   };
+  
+  systemd.services.mediamtx.path = lib.mkForce [ pkgs.ffmpeg_6-full ];
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
