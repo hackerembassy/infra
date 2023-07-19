@@ -41,8 +41,8 @@ in
             "http://localhost"
             "http://app.fluidd.xyz"
             "http://my.mainsail.xyz"
-	    "http://le-fail.lan"
-	    "http://printer-anette.lan"
+      	    "http://le-fail.lan"
+      	    "http://printer-anette.lan"
           ];
           trusted_clients = [ "0.0.0.0/0" "::0/0" ];
         };
@@ -66,4 +66,21 @@ in
     enable = true;
     after = [ "network.target" ];
   };
+
+  systemd.services.klipperscreen = let 
+    conf = builtins.toFile "KlipperConfig.conf" ''
+      [printer Anette]
+      moonraker_host: localhost
+      moonraker_port: 7125 
+    '';
+  in {
+    environment = {
+      DISPLAY = "klipperphone.lan:0";
+    };
+    script = "${pkgs.klipperscreen}/bin/KlipperScreen -c ${conf}"; 
+    enable = true;
+    after = [ "moonraker.service" ];
+    wantedBy = [ "multi-user.target" ];
+  };
+  
 }

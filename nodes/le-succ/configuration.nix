@@ -78,8 +78,10 @@
   # Enable the OpenSSH daemon.
   services.openssh = { 
       enable = true;
-      settings.permitRootLogin = "yes";
-      settings.passwordAuthentication = false;
+      settings = {
+        PermitRootLogin = "yes";
+        PasswordAuthentication = false;
+      };
   };
 
   services.mediamtx = {

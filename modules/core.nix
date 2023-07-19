@@ -65,7 +65,7 @@ with prelude args; {
     '';
 
     openssh = on // {
-      passwordAuthentication = false;
+      settings.PasswordAuthentication = false;
     };
 
     xserver = {
