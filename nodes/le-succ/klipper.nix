@@ -71,11 +71,15 @@ in
     conf = builtins.toFile "KlipperConfig.conf" ''
       [printer Anette]
       moonraker_host: localhost
+      moonraker_port: 7125
+      
+      [printer Plumbus]
+      moonraker_host: printer-plumbus.lan
       moonraker_port: 7125 
     '';
   in {
     environment = {
-      DISPLAY = "klipperphone.lan:0";
+      DISPLAY = "192.168.223.175:0";
     };
     script = "${pkgs.klipperscreen}/bin/KlipperScreen -c ${conf}"; 
     enable = true;
