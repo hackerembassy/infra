@@ -68,6 +68,7 @@ in
   };
 
   systemd.services.klipperscreen = let 
+    iface = "enp0s20u5";
     conf = builtins.toFile "KlipperConfig.conf" ''
       [printer Anette]
       moonraker_host: localhost
@@ -78,10 +79,12 @@ in
       moonraker_port: 7125 
     '';
   in {
-    environment = {
-      DISPLAY = "klipperphone.lan:0";
-    };
-    script = "${pkgs.klipperscreen}/bin/KlipperScreen -c ${conf}"; 
+    path = with pkgs; [ klipperscreen iproute2 ];
+    script = ''
+      export DISPLAY=$(ip r show dev ${iface} default | cut -d ' ' -f3):0
+      echo Starting at $DISPLAY
+      KlipperScreen -c ${conf}
+    ''; 
     enable = true;
     after = [ "moonraker.service" ];
     wantedBy = [ "multi-user.target" ];
