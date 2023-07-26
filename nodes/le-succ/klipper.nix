@@ -79,7 +79,7 @@ in
     '';
   in {
     environment = {
-      DISPLAY = "192.168.223.175:0";
+      DISPLAY = "klipperphone.lan:0";
     };
     script = "${pkgs.klipperscreen}/bin/KlipperScreen -c ${conf}"; 
     enable = true;
