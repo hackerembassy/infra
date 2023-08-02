@@ -86,8 +86,12 @@ in
       KlipperScreen -c ${conf}
     ''; 
     enable = true;
-    after = [ "moonraker.service" ];
-    wantedBy = [ "multi-user.target" ];
+    after = [ "moonraker.service" "sys-subsystem-nE${iface}t-devices-${iface}.device" ];
+    bindsTo = [ "sys-subsystem-net-devices-${iface}.device" ];
+    partOf = [ "sys-subsystem-net-devices-${iface}.device" ];
+    requires = [ "sys-subsystem-net-devices-${iface}.device" ];
+    wantedBy = [ "sys-subsystem-net-devices-${iface}.device" ];
+    serviceConfig.Restart = "always";
   };
   
 }
