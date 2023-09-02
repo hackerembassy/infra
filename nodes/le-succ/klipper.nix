@@ -17,11 +17,15 @@ in
 
   security.polkit = on;
 
+  #  Actually, /var/lib/klipper will be taken over by moonraker
+  # /var/lib/klipper/config will contain both klipper and moonraker configs
+
   services.klipper = on // {
     user = "klipper";
     group = "klipper";
     configFile = ./printer.cfg;
     mutableConfig = true;
+    mutableConfigFolder = "/var/lib/klipper/config";
     firmwares = {
       anette-main = on // {
         serial = "/dev/serial/by-id/usb-Klipper_lpc1769_12345-if00";
@@ -35,6 +39,7 @@ in
     group = "klipper";
     address = "0.0.0.0";
     allowSystemControl = true;
+    stateDir = "/var/lib/klipper";
     settings = {
       authorization = {
         cors_domains = [
