@@ -1,4 +1,5 @@
-{ config, pkgs, prelude, ... }@args: let
+{ config, pkgs, prelude, ... }@args:
+let
   on = { enable = true; };
 in
 
@@ -10,10 +11,10 @@ in
     isSystemUser = true;
     group = "klipper";
   };
-  users.groups.klipper = {};
+  users.groups.klipper = { };
 
   security.polkit = on;
-  
+
   services.klipper = on // {
     user = "klipper";
     group = "klipper";
@@ -38,25 +39,25 @@ in
     allowSystemControl = true;
     configDir = "/var/lib/klipper";
     settings = {
-        server.enable_debug_logging = true;
-        authorization = {
-          cors_domains = [
-            "http://${config.networking.hostName}"
-            "http://${config.networking.hostName}.lan"
-            "http://${config.networking.hostName}.local"
-            "http://localhost"
-            "http://app.fluidd.xyz"
-            "http://my.mainsail.xyz"
-	    "http://le-fail.lan"
-	    "http://printer-plumbus.lan"
-          ];
-          trusted_clients = [ "0.0.0.0/0" "::0/0" ];
-        };
-        file_manager = {
-          enable_object_processing = "False";
-        };
-        octoprint_compat = { };
+      server.enable_debug_logging = true;
+      authorization = {
+        cors_domains = [
+          "http://${config.networking.hostName}"
+          "http://${config.networking.hostName}.lan"
+          "http://${config.networking.hostName}.local"
+          "http://localhost"
+          "http://app.fluidd.xyz"
+          "http://my.mainsail.xyz"
+          "http://le-fail.lan"
+          "http://printer-plumbus.lan"
+        ];
+        trusted_clients = [ "0.0.0.0/0" "::0/0" ];
       };
+      file_manager = {
+        enable_object_processing = "False";
+      };
+      octoprint_compat = { };
+    };
   };
   services.fluidd = on // {
     nginx = {
@@ -68,7 +69,7 @@ in
   };
 
   systemd.services.klippercam = {
-    script = "${pkgs.ustreamer}/bin/ustreamer -f 15 -s 0"; 
+    script = "${pkgs.ustreamer}/bin/ustreamer -f 15 -s 0";
     enable = true;
     after = [ "network.target" ];
   };
