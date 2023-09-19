@@ -3,7 +3,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     terranix.url = "github:terranix/terranix";
-    deploy-rs.url = "github:serokell/deploy-rs";
     printer-anette = {
       url = "github:hackerembassy/printer-anette";
       flake = false;
@@ -11,7 +10,7 @@
     home-manager.url = "github:nix-community/home-manager";
   };
 
-  outputs = inputs@{ self, nixpkgs, terranix, deploy-rs, home-manager, ... }:
+  outputs = inputs@{ self, nixpkgs, terranix, home-manager, ... }:
     with builtins; let
       nixpkgsPatches = [
         # (builtins.fetchurl {
@@ -30,7 +29,7 @@
             src = nixpkgs;
           };
           self = (import "${patchedSource}/flake.nix").outputs { inherit self; };
-        in self
+        in if nixpkgsPatches == [] then nixpkgs else self
       ) nixpkgs.legacyPackages;
 
       nixpkgs' =
@@ -47,7 +46,7 @@
           )
           nixpkgs;
 
-      shellSystems = attrNames deploy-rs.packages;
+      shellSystems = [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
       # Functions to filter out pkgs.
       # Technically should be provided by `flake-utils`, but it's nicer to vendor some of that stuff.
       foldAttrs =  foldl' (a: b: a // b) {};
@@ -63,8 +62,6 @@
       buildConfig = system: modules: { inherit modules system specialArgs; };
       buildSystem = system: modules:
         nixpkgsPatched.${system}.lib.nixosSystem (buildConfig system modules);
-      deployNixos = s: deploy-rs.lib.${s.pkgs.system}.activate.nixos s;
-      deployHomeManager = sys: s: deploy-rs.lib.${sys}.activate.home-manager s;
 
       # Maps over ./nodes directory, reading all of the configs there.
       hosts = attrNames (readDir ./nodes);
@@ -88,11 +85,6 @@
         (nixpkgs' + /nixos/modules/virtualisation/build-vm.nix)
       ]).config.system.build.vm;
 
-      toDeployRsHost = hostname: with (hostAttrs hostname); {
-        hostname = settings.hostname;
-        profiles.system = { path = deployNixos (toNode hostname); user = "root"; };
-      };
-
     in
     {
 
@@ -112,20 +104,14 @@
               # Nix formatter
               nixpkgs-fmt
               # Nix config deployment utility
-              deploy-rs.packages.${system}.default
               # Terraform
-              terraform
+              # terraform
               gnumake
             ];
           };
       });
 
-      nixosConfigurations = with builtins; foldAttrs (map (hostname: {${hostname} = toNode hostname; }) hosts);
-
-      deploy = {
-        sshUser = "root";
-        nodes = with builtins; foldAttrs (map (hostname: {${hostname} = toDeployRsHost hostname; }) hosts);
-      };
+      nixosConfigurations = foldAttrs (map (hostname: {${hostname} = toNode hostname; }) hosts);
 
     };
 }

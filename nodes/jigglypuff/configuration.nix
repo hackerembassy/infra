@@ -10,6 +10,7 @@
      ./default.nix 
 #     ./klipper.nix
      ./nodered.nix
+     ./podman.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -30,13 +31,16 @@
 
   services.pipewire.enable = true;
 
-  programs.atop.enable = true;
+  # programs.atop.enable = true;
 
   documentation.enable = false;
 
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     nano
+    htop
+    btop
+    strace
     wget
     zsh
   ];

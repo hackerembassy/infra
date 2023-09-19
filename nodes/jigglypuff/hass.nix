@@ -4,7 +4,7 @@
   services = {
     avahi = on;
 
-    home-assistant = on // {
+    home-assistant = {
       configWritable = true;
 #      openFirewall = true;
       lovelaceConfigWritable = true;
