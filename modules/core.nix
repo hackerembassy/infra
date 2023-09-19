@@ -108,6 +108,7 @@ with prelude args; {
     emacs # an editor, too
     nix-index  # woo, search in nix packages files!
     nix-zsh-completions zsh-completions  # systemctl ena<TAB>... AAAAGH
+    helix
   ]);
 
 
