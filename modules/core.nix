@@ -19,7 +19,7 @@ with prelude args; {
   nix = {
     package = pkgs.nixUnstable;
     settings = {
-      trusted-users = [ "root" config._.user ];
+      trusted-users = [ "root" ];
       experimental-features = [ "nix-command" "flakes" "ca-derivations" ];
     };
 
@@ -28,7 +28,7 @@ with prelude args; {
       let
         lock = (with builtins; fromJSON (readFile ../flake.lock));
       in
-      {
+      lib.mkForce {
         nixpkgs = with lock.nodes.${lock.nodes.${lock.root}.inputs.nixpkgs}; {
           from = { id = "nixpkgs"; type = "indirect"; };
           to = locked;
@@ -77,16 +77,15 @@ with prelude args; {
 
   users = {
     mutableUsers = false;
-    users."${config._.user}" = {
-      isNormalUser = true;
-      extraGroups = [
-        "plugdev" "wheel" "nitrokey"
-        "containers" "networkmanager"
-        "dialout" "video"
-      ];
+    users.root = {
       shell = pkgs.zsh;
+      # isNormalUser = true;
+      # isSystemUser = false;
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJprtCdLq8X4sYWZp3loq69iED8h1YEvfe2j3vUEIsVy dipierro@MacBook-Pro.lan"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIKIABDEIeccdbZwTgxhkVUIyZa8fx9uyiE0I2S9t4x1 cab404@meow2"
+      ];
     };
-    users.root.shell = pkgs.zsh;
   };
 
   security = {

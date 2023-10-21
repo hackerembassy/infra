@@ -20,12 +20,6 @@
         ];
       };
 
-      "${config._.user}" = {
-        imports = [
-          ./user-shell.nix
-        ];
-      };
-
     };
 
   };
