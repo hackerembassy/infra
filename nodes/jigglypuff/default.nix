@@ -16,6 +16,7 @@
     imports = [
       # "${inputs.self}/modules/sway/core.nix"
     ];
+    home.stateVersion = "22.05";
     home.keyboard = {
       layout = config.services.xserver.layout;
       options = with builtins;
@@ -23,7 +24,11 @@
     };
   };
 
-  users.users.user.password = "12345";
+  users.users.user = {
+    password = "12345";
+    isNormalUser = true;
+  };
+
   users.users.root.password = "12345";
   security.sudo.wheelNeedsPassword = false;
 
