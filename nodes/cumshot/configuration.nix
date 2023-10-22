@@ -11,6 +11,7 @@
   ];
 
   networking.networkmanager.enable = true;
+  services.tailscale.enable = true;
   services.headscale = {
     enable = true;
     settings = {
