@@ -103,6 +103,7 @@
             nativeBuildInputs = [
               # Nix formatter
               nixpkgs-fmt
+              nil
               # Nix config deployment utility
               # Terraform
               # terraform
