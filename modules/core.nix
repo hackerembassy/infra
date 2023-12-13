@@ -82,6 +82,7 @@ with prelude args; {
       # isNormalUser = true;
       # isSystemUser = false;
       openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICXIhiha4PKZNsC36QP/a1/0f8l8igJnc00lJzfRzmuf nick@CMDB-175087.lan"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJprtCdLq8X4sYWZp3loq69iED8h1YEvfe2j3vUEIsVy dipierro@MacBook-Pro.lan"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIKIABDEIeccdbZwTgxhkVUIyZa8fx9uyiE0I2S9t4x1 cab404@meow2"
       ];
