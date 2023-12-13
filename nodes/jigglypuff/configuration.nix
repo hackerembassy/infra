@@ -11,6 +11,7 @@
 #     ./klipper.nix
      ./nodered.nix
      ./podman.nix
+     ./cum.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
