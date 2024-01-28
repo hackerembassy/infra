@@ -1,0 +1,24 @@
+version: "3.6"
+
+services:
+  node_exporter:
+    image: quay.io/prometheus/node-exporter:latest
+    command:
+      - "--path.rootfs=/host"
+    container_name: node_exporter
+    entrypoint:
+      - "/bin/node_exporter"
+    network_mode: host
+    volumes:
+      - "/:/host:ro"
+    restart: unless-stopped
+
+  prometheus-pve-exporter:
+    container_name: prometheus-pve-exporter
+    image: prompve/prometheus-pve-exporter
+    entrypoint:
+      - "/opt/prometheus-pve-exporter/bin/pve_exporter"
+    network_mode: host
+    volumes:
+      - "/etc/prometheus/pve.yml:/etc/prometheus/pve.yml"
+    restart: unless-stopped
