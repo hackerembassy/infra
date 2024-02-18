@@ -89,7 +89,7 @@ with prelude args;
       enableCompletion = true;
       enableVteIntegration = true;
       enableAutosuggestions = true;
-      enableSyntaxHighlighting = true;
+      syntaxHighlighting = on;
 
       defaultKeymap = "emacs";
       initExtra = ''
