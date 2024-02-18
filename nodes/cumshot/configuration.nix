@@ -4,6 +4,7 @@
   imports = [ 
      ./default.nix
      ./tailscale.nix
+     ./dex.nix
   ];
 
   networking.networkmanager.enable = true;
