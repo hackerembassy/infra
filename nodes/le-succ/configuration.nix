@@ -84,17 +84,15 @@
       };
   };
 
-  services.mediamtx = {
-      enable = true;
-      settings.paths = {
-        cam = {
-          runOnInit = "ffmpeg -init_hw_device qsv=hw -filter_hw_device hw -hwaccel qsv -c:v mjpeg_qsv -hwaccel_output_format qsv -f v4l2 -input_format mjpeg -video_size 1600x1200 -framerate 15 -i /dev/video0 -vf 'hwupload=extra_hw_frames=10' -c:v h264_qsv -profile baseline -b:v 2M -g 15 -f rtsp rtsp://localhost:$RTSP_PORT/$RTSP_PATH";
-          runOnInitRestart = true;
-        };
+  services.go2rtc = {
+    enable = true;
+    settings = {
+      streams = {
+        cam = "ffmpeg:device?video=/dev/video0&input_format=yuyv422&video_size=640x480#video=h264";
       };
+      ffmpeg.bin = "${pkgs.ffmpeg_6-full}/bin/ffmpeg";
+    };
   };
-  
-  systemd.services.mediamtx.path = lib.mkForce [ pkgs.ffmpeg_6-full ];
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
