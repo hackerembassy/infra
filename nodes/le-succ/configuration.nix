@@ -63,6 +63,8 @@
     neovim
     git
     ffmpeg_6-full
+    libva-utils
+    htop
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -88,11 +90,12 @@
     enable = true;
     settings = {
       streams = {
-        cam = "ffmpeg:device?video=/dev/video0&input_format=yuyv422&video_size=640x480#video=h264";
+        cam = "ffmpeg:device?video=/dev/video0&input_format=yuyv422&video_size=1280x720#video=h264#hardware=vaapi";
       };
       ffmpeg.bin = "${pkgs.ffmpeg_6-full}/bin/ffmpeg";
     };
   };
+
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

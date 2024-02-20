@@ -8,7 +8,8 @@
     [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "amdgpu" ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.kernelModules = [ "amdgpu" ];
+  boot.kernelParams = [ "radeon.cik_support=0" "amdgpu.cik_support=1" ];
   boot.kernelModules = [ "kvm_amd" ];
   boot.extraModulePackages = [ ];
 
@@ -39,6 +40,6 @@
   # hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   hardware.opengl = {
     enable = true;
-    extraPackages = with pkgs; [ vaapiVdpau libvdpau-va-gl ];
+    extraPackages = with pkgs; [ ];
   };
 }
