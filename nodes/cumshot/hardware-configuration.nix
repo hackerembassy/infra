@@ -8,4 +8,6 @@
     [ (modulesPath + "/virtualisation/proxmox-lxc.nix")
     ];
 
+  services.fstrim.enable = true;
+
 }
