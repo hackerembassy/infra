@@ -1,7 +1,7 @@
 { config, pkgs, prelude, ... }@args:
 let
   on = { enable = true; };
-  iface = "enp0s20u5";
+  iface = "enp0s18u1u1";
   conf = builtins.toFile "KlipperConfig.conf" ''
     [printer Anette]
     moonraker_host: localhost
