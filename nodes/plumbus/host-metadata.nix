@@ -1,4 +1,4 @@
 {
     arch = "aarch64-linux";
-    hostname = "plumbus.lan";
+    hostname = "printer-plumbus.lan";
 }

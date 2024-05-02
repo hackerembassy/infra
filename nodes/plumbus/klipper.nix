@@ -20,16 +20,16 @@ in
     group = "klipper";
     configFile = ./printer.cfg;
     mutableConfig = true;
-    firmwares = {
-      anette-main = on // {
-        serial = "/dev/serial/by-id/usb-Klipper_lpc1769_12345-if00";
-        configFile = ./anette.main.config;
-      };
-      anette-ext = on // {
-        serial = "/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0";
-        configFile = ./anette.ext.config;
-      };
-    };
+    # firmwares = {
+    #   anette-main = on // {
+    #     serial = "/dev/serial/by-id/usb-Klipper_lpc1769_12345-if00";
+    #     configFile = ./anette.main.config;
+    #   };
+    #   anette-ext = on // {
+    #     serial = "/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0";
+    #     configFile = ./anette.ext.config;
+    #   };
+    # };
   };
 
   services.moonraker = on // {
@@ -73,4 +73,7 @@ in
     enable = true;
     after = [ "network.target" ];
   };
+
+
+
 }
