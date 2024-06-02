@@ -1,0 +1,15 @@
+# AWS access key ID for S3-compatible storage
+access-key-id:     *** 
+# AWS secret access key for S3-compatible storage
+secret-access-key: ***
+
+dbs:
+  - path: /data/data.db  # Path to the SQLite database file
+    replicas:
+      - type: s3  # Type of storage for the replica (s3 for Amazon S3)
+        bucket: hackem-db  # Name of the S3 bucket for the replica
+        path: data.db  # Path within the S3 bucket for the replica
+        # Endpoint of the S3-compatible service (not needed for Amazon S3)
+        endpoint: s3.example.com 
+        # Flag to use path-style access for the S3 bucket (needed for some S3-compatible services)
+        force-path-style: true
