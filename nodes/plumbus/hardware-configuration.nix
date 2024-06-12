@@ -10,16 +10,17 @@
 
   # Hardware config?
   boot.loader.grub.enable = false;
-  boot.loader.raspberryPi = {
-    enable = true;
-    version = 3;
-    uboot.enable = true;
-    firmwareConfig = ''
-      force_turbo=1
-    '';
-  };
+  boot.loader.generic-extlinux-compatible.enable = true;
+  # boot.loader.raspberryPi = {
+  #   enable = true;
+  #   version = 3;
+  #   uboot.enable = true;
+  #   firmwareConfig = ''
+  #     force_turbo=1
+  #   '';
+  # };
 
-  boot.tmpOnTmpfs = true;
+  boot.tmp.useTmpfs = true;
 
   fileSystems = {
     "/" = {

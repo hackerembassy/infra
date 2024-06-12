@@ -15,21 +15,36 @@ in
 
   security.polkit = on;
 
+  # nixpkgs.overlays = [
+  #   (super: self: {
+  #     klipper = self.klipper.overrideAttrs {
+  #       version = "fucking-adc";
+  #       src = 
+  #         self.fetchFromGitHub {
+  #           owner = "klipper3d";
+  #           repo = "klipper";
+  #           rev = "6cd174208bd9bbd51dc0d519a26661fb926d038a";
+  #           hash = "sha256-mIBJtrkh+SIGx9s+ZyUcn0343HEkGN8i0N/Ap/AETVs=";
+  #         }
+  #       ;
+  #     };
+  #   })
+
+  # ];
+
   services.klipper = on // {
     user = "klipper";
     group = "klipper";
     configFile = ./printer.cfg;
     mutableConfig = true;
-    # firmwares = {
-    #   anette-main = on // {
-    #     serial = "/dev/serial/by-id/usb-Klipper_lpc1769_12345-if00";
-    #     configFile = ./anette.main.config;
-    #   };
-    #   anette-ext = on // {
-    #     serial = "/dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0";
-    #     configFile = ./anette.ext.config;
-    #   };
-    # };
+    mutableConfigFolder = "/var/lib/klipper/config";
+    firmwares = {
+      plumbus = {
+        enableKlipperFlash = true;
+        serial = "/dev/serial/by-id/usb-Klipper_sam4e8e_003230533750414D3135303336303534-if00";
+        configFile = ./plumbus.cfg;
+      };
+    };
   };
 
   services.moonraker = on // {
@@ -37,9 +52,8 @@ in
     group = "klipper";
     address = "0.0.0.0";
     allowSystemControl = true;
-    configDir = "/var/lib/klipper";
+    stateDir = "/var/lib/klipper";
     settings = {
-      server.enable_debug_logging = true;
       authorization = {
         cors_domains = [
           "http://${config.networking.hostName}"

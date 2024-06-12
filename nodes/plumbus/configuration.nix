@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports =
@@ -11,6 +11,7 @@
       ./hardware-configuration.nix
       ./klipper.nix
       ./klipperscreen.nix
+      "${inputs.self}/modules/tmplog.nix"
     ];
 
 
@@ -25,7 +26,6 @@
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
     font = "Lat2-Terminus16";
-    useXkbConfig = true; # use xkbOptions in tty.
   };
 
   # Enable the X11 windowing system.
@@ -34,8 +34,8 @@
   services.avahi.enable = true;
 
   # Configure keymap in X11
-  services.xserver.layout = "us";
-  services.xserver.xkbOptions =
+  services.xserver.xkb.layout = "us";
+  services.xserver.xkb.options =
     "ctrl:nocaps";
 
 
@@ -96,6 +96,8 @@
   # Or disable the firewall altogether.
   networking.firewall.enable = false;
 
+  users.users.root.hashedPassword = "$y$j9T$q4c/.wjNYg7nzUL4/38Ef0$P0nfnjRF/GZRxcLfeDkHupcoZWnr7fP.KvzpB1TiqY.";
+  
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
@@ -106,6 +108,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "22.11"; # Did you read the comment?
+  system.stateVersion = "24.05"; # Did you read the comment?
 }
 
