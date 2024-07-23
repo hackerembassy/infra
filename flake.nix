@@ -65,15 +65,17 @@
 
       # Maps over ./nodes directory, reading all of the configs there.
       hosts = attrNames (readDir ./nodes);
-      hostAttrs = hostname: {
-        settings = import ./nodes/${hostname}/host-metadata.nix;
-        config = import ./nodes/${hostname}/configuration.nix;
-        hw-config = import ./nodes/${hostname}/hardware-configuration.nix;
+      nodes = with builtins; listToAttrs (map (a: {name = a; value = ./nodes/${a}; }) hosts);
+
+      hostAttrs = nodepath: {
+        settings = import (nodepath + "/host-metadata.nix");
+        config = import (nodepath + "/configuration.nix");
+        hw-config = import (nodepath + "/hardware-configuration.nix");
       };
 
-      toNode = hostname: with (hostAttrs hostname); buildSystem settings.arch [
+      toNode = nodename: with (hostAttrs nodes.${nodename}); buildSystem settings.arch [
         config
-        ({lib, ...}: { networking.hostName = hostname; })
+        ({lib, ...}: { networking.hostName = nodename; })
         ./common/configuration.nix
         hw-config
       ];
@@ -104,15 +106,14 @@
               # Nix formatter
               nixpkgs-fmt
               nil
-              # Nix config deployment utility
-              # Terraform
-              # terraform
+              nushell
               gnumake
             ];
           };
       });
 
-      nixosConfigurations = foldAttrs (map (hostname: {${hostname} = toNode hostname; }) hosts);
+      nixosConfigurations = mapAttrs (nodename: _: toNode nodename) nodes;
 
+      nodeMeta = builtins.mapAttrs  (_: h: (hostAttrs h)) nodes;
     };
 }

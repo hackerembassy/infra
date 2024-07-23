@@ -26,12 +26,12 @@
       enablePasswordDB = true;
       staticClients = [
         # No clients yet, but they look about like that
-        # {
-        #   id = "outline";
-        #   name = "Outline Client";
-        #   redirectURIs = [ "https://wiki.hackem.cc/auth/oidc.callback" ];
-        #   secretFile = "/var/lib/dex/outline-oidc-secret";
-        # }
+        {
+          id = "outline";
+          name = "Outline Client";
+          redirectURIs = [ "https://lore.hackem.cc/auth/oidc.callback" ];
+          secretFile = "/var/lib/dex/outline-oidc-secret";
+        }
       ];
 
       connectors = [
@@ -57,9 +57,9 @@
   };
 
   # You will need to either puncutre a hole in systemd containment, or drop it in a state directory — I prefer latter.
-  # system.activationScripts = {
-    # cp-dex-secrets = ''
-    #   cp /secrets/outline-oidc-secret /var/lib/dex
-    # '';
-  # };
+  system.activationScripts = {
+    cp-dex-secrets = ''
+      cp /secrets/outline-oidc-secret /var/lib/dex
+    '';
+  };
 }

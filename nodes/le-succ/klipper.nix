@@ -27,7 +27,7 @@ in
     mutableConfig = true;
     mutableConfigFolder = "/var/lib/klipper/config";
     firmwares = {
-      anette-main = on // {
+      anette-main = {
         serial = "/dev/serial/by-id/usb-Klipper_lpc1769_12345-if00";
         configFile = ./anette.main.config;
       };

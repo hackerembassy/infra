@@ -13,14 +13,14 @@
   users.groups.klipper = {};
 
   security.polkit = on;
-  
+
   services.klipper = on // {
     user = "klipper";
     group = "klipper";
     configFile = "${args.inputs.printer-anette}/config.cfg";
     mutableConfig = true;
     firmwares = {
-      anette = on // {
+      anette = {
         serial = "/dev/serial/by-id/usb-Klipper_lpc1769_12345-if00";
         configFile = "${args.inputs.printer-anette}/.config";
       };

@@ -173,8 +173,8 @@ with prelude args; {
           # Also, it interferes with me working in blender ;D
           dwt = "disable";
           # middle_emulation = "enabled";
-          xkb_layout = config.home.keyboard.layout;
-          xkb_options =
+          xkb.layout = config.home.keyboard.layout;
+          xkb.options =
             pkgs.lib.concatStringsSep "," config.home.keyboard.options;
         };
 

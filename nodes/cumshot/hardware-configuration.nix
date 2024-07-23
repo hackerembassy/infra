@@ -4,6 +4,8 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
+  boot.isContainer = true;
+
   imports =
     [ (modulesPath + "/virtualisation/proxmox-lxc.nix")
     ];

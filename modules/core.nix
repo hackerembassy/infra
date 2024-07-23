@@ -17,7 +17,7 @@ with prelude args; {
   i18n.defaultLocale = "C.UTF-8";
 
   nix = {
-    package = pkgs.nixUnstable;
+    package = pkgs.nixVersions.latest;
     settings = {
       trusted-users = [ "root" ];
       experimental-features = [ "nix-command" "flakes" "ca-derivations" ];
