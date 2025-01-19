@@ -42,8 +42,6 @@ with prelude args; {
     kernelParams = [ "quiet" ];
   };
 
-  hardware.nitrokey.enable = true;
-
   services = {
 
     avahi = on;
@@ -97,7 +95,7 @@ with prelude args; {
   environment.shells = [ pkgs.zsh ];
   environment.pathsToLink = [ "/share/zsh" ];
   environment.variables = {
-    EDITOR = "vi";
+    EDITOR = "hx";
   };
   environment.defaultPackages = (with pkgs; [
     # this section is a tribute to my PEP-8 hatred

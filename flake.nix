@@ -1,8 +1,28 @@
 {
   description = "«simple» deploy-rs + terraform config";
+  nixConfig = {
+    extra-substituters = [
+      "https://nix-community.cachix.org"
+      "https://helix.cachix.org"
+      "https://cache.nixos.org"
+    ];
+    trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "helix.cachix.org-1:ejp9KQpR1FBI2onstMQ34yogDm4OgU2ru6lIwPvuCVs="
+    ];
+  };
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     terranix.url = "github:terranix/terranix";
+
+    rpi-nix.url = "github:nix-community/raspberry-pi-nix";
+    # rpi-nix.inputs.nixpkgs.follows = "nixpkgs";
+
+    printit.url = "github:cab404/printit/nix";
+    printit.inputs.nixpkgs.follows = "nixpkgs";
+
     printer-anette = {
       url = "github:hackerembassy/printer-anette";
       flake = false;
