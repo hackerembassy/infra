@@ -200,11 +200,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1737317655,
-        "narHash": "sha256-6+bnxjx7FtLTeifM2kLrLJmmSH5x17AAs5VA9CFcsGI=",
+        "lastModified": 1737363956,
+        "narHash": "sha256-Oa1GVInOUuAcncxbQ/ENKPuqMDa16iWukmapucEx/Kw=",
         "owner": "cab404",
         "repo": "printit",
-        "rev": "f927093b6d5b2e82b462f49f906a4f275eddf13e",
+        "rev": "bfc7bb4514f235f18299b577490cac4f6493ef46",
         "type": "github"
       },
       "original": {

@@ -8,6 +8,7 @@
     # "${inputs.nixpkgs}/nixos/modules/installer/sd-card/sd-image.nix"
   ];
 
+  powerManagement.cpuFreqGovernor = "powersave";
   # Hardware config?
   # boot.loader.grub.enable = false;
   # boot.loader.generic-extlinux-compatible.enable = true;
