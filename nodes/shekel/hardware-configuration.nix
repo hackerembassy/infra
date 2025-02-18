@@ -9,6 +9,13 @@
   ];
 
   powerManagement.cpuFreqGovernor = "powersave";
+
+  services.journald.extraConfig = ''
+    Storage=volatile
+    RuntimeMaxUse=64M
+  '';
+  boot.initrd.checkJournalingFS = true;
+
   # Hardware config?
   # boot.loader.grub.enable = false;
   # boot.loader.generic-extlinux-compatible.enable = true;
