@@ -1,5 +1,5 @@
 {
     arch = "x86_64-linux";
-    hostname = "teresa.dipier.ro";
-    port = 40422;
+    host = "100.64.0.5";
+    # port = 40422;
 }
