@@ -90,7 +90,7 @@
     enable = true;
     settings = {
       streams = {
-        cam = "ffmpeg:device?video=/dev/video0&input_format=yuyv422&video_size=1280x720#video=h264#hardware=vaapi";
+        cam = "ffmpeg:device?video=/dev/video0&input_format=mjpeg&video_size=1280x720&codec=copy&container=mpegts";
       };
       ffmpeg.bin = "${pkgs.ffmpeg_6-full}/bin/ffmpeg";
     };
