@@ -11,6 +11,7 @@
   boot.initrd.kernelModules = [ "amdgpu" ];
   boot.kernelParams = [ "radeon.cik_support=0" "amdgpu.cik_support=1" ];
   boot.kernelModules = [ "kvm_amd" ];
+  powerManagement.cpuFreqGovernor = "schedutil";
   boot.extraModulePackages = [ ];
 
   services.udev.extraRules = ''
@@ -18,12 +19,14 @@
   '';
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/ecec0c1f-a9f9-49c8-9c61-69695292d3ad";
+    {
+      device = "/dev/disk/by-uuid/ecec0c1f-a9f9-49c8-9c61-69695292d3ad";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/2982-B8EE";
+    {
+      device = "/dev/disk/by-uuid/2982-B8EE";
       fsType = "vfat";
     };
 

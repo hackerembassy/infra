@@ -5,14 +5,17 @@
 { config, inputs, lib, pkgs, ... }:
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./fluidscreen.nix
       ./users.nix
       ./klipper.nix
       "${inputs.self}/modules/home-manager"
     ];
 
   _.user = "cab";
+  systemd.services."NetworkManager-wait-online".wantedBy = lib.mkForce [ ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -21,7 +24,7 @@
   networking.hostName = "le-succ"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = "Asia/Yerevan";
@@ -75,22 +78,25 @@
   #   enableSSHSupport = true;
   # };
 
+  # Yeah... got tired of failing wifi
+  users.users.root.password = "12345";
+
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  services.openssh = { 
-      enable = true;
-      settings = {
-        PermitRootLogin = "yes";
-        PasswordAuthentication = false;
-      };
+  services.openssh = {
+    enable = true;
+    settings = {
+      PermitRootLogin = "yes";
+      PasswordAuthentication = false;
+    };
   };
 
   services.go2rtc = {
     enable = true;
     settings = {
       streams = {
-        cam = "ffmpeg:device?video=/dev/video0&input_format=mjpeg&video_size=1280x720&codec=copy&container=mpegts";
+        cam = "ffmpeg:device?video=/dev/video0&input_format=mjpeg&video_size=320x240&codec=copy&container=mpegts";
       };
       ffmpeg.bin = "${pkgs.ffmpeg_6-full}/bin/ffmpeg";
     };
@@ -114,7 +120,7 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.11"; # Did you read the comment?
-  
+
   home-manager.users.keimoger = {
     home.stateVersion = "22.11";
   };
@@ -122,4 +128,3 @@
   programs.flashrom.enable = true;
   programs.zsh.enable = true;
 }
-
