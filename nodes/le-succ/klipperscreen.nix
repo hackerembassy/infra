@@ -1,12 +1,12 @@
 { config, pkgs, prelude, ... }@args:
 let
   on = { enable = true; };
-  iface = "enp0s18u1u1";
+  iface = "enp0s16u2";
   conf = builtins.toFile "KlipperConfig.conf" ''
     [printer Anette]
     moonraker_host: localhost
     moonraker_port: 7125
-    
+
     [printer Plumbus]
     moonraker_host: printer-plumbus.lan
     moonraker_port: 7125 
