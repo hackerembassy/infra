@@ -10,6 +10,7 @@
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
   boot.plymouth.enable = true;
+  boot.plymouth.theme = "breeze";
 
   powerManagement.cpuFreqGovernor = "schedutil";
 
