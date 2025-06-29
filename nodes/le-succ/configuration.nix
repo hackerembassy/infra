@@ -96,7 +96,8 @@
     enable = true;
     settings = {
       streams = {
-        cam = "ffmpeg:device?video=/dev/video0&input_format=mjpeg&video_size=320x240&codec=copy&container=mpegts";
+        #cam = "ffmpeg:device?video=/dev/video0&input_format=mjpeg&video_size=320x240&codec=copy&container=mpegts";
+        cam = "ffmpeg:device?video=/dev/video0&input_format=yuyv422&video_size=1280x720#video=h264#hardware";
       };
       ffmpeg.bin = "${pkgs.ffmpeg_6-full}/bin/ffmpeg";
     };

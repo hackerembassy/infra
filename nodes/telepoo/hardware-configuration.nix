@@ -12,6 +12,7 @@
   boot.kernelParams = [ "radeon.cik_support=0" "amdgpu.cik_support=1" ];
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
+  powerManagement.cpuFreqGovernor = "schedutil";
 
 
   fileSystems."/" =
