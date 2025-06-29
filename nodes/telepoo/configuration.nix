@@ -6,10 +6,12 @@
 {
   imports =
     [ # Include the results of the hardware scan.
+      inputs.printit.nixosModules.x86_64-linux.default
       ./hardware-configuration.nix
       ./users.nix
       ./tv.nix
       "${inputs.self}/modules/home-manager"
+      "${inputs.self}/modules"
     ];
 
   _.user = "cab";
@@ -37,23 +39,8 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-  console = {
-    # font = "Lat2-Terminus16";
-    # keyMap = "us";
-    useXkbConfig = true; # use xkbOptions in tty.
-  };
-
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-
-  # Configure keymap in X11
-  services.xserver.layout = "us";
-  services.xserver.xkbOptions = "caps:ctrl"; # map caps to escape.
-
   # Enable CUPS to print documents.
-  # services.printing.enable = true;
+  services.printing.enable = true;
 
   # Enable sound.
   # sound.enable = true;
@@ -114,5 +101,10 @@
   system.stateVersion = "25.05"; # Did you read the comment?
 
   programs.zsh.enable = true;
+
+    # Printer udev rule
+  services.udev.extraRules = ''
+    ATTR{idVendor}=="04f9", ATTR{idProduct}=="2016", GROUP="wheel"
+  '';
 }
 

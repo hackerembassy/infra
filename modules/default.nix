@@ -1,6 +1,6 @@
 { pkgs, lib, ... }:
 with lib;
 {
-  require = [ ./options.nix ./core.nix ];
+  require = [ ./options.nix ./barecore.nix ];
 
 }
