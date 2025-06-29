@@ -8,5 +8,6 @@
     RuntimeMaxUse=64M
   '';
   boot.initrd.checkJournalingFS = true;
+  boot.kernelParams = [ "brcmfmac.feature_disable=0x82000" "brcmfmac.roamoff=1" ];
 
 }
