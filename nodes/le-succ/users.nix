@@ -6,14 +6,6 @@
     wheelNeedsPassword = false;
   };
 
-  users.users.cab = {
-    shell = pkgs.zsh;
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
-    packages = with pkgs; [
-    ];
-  };
-
   users.users.root = {
     password = "12345";
   };
@@ -23,6 +15,15 @@
     isNormalUser = true;
     extraGroups = [ "wheel" ];
     packages = with pkgs; [
+    ];
+  };
+
+  users.users.netbug = {
+    shell = pkgs.zsh;
+    isNormalUser = true;
+    extraGroups = [ "wheel" ];
+    packages = with pkgs; [
+      "mc"
     ];
   };
 }
