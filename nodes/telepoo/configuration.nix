@@ -59,6 +59,7 @@
     ffmpeg_6-full
     libva-utils
     htop
+    chromium
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

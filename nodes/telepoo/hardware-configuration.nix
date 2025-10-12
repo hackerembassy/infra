@@ -4,13 +4,15 @@
   imports =
     [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "amdgpu" ];
-  boot.initrd.kernelModules = [ "amdgpu" ];
-  boot.kernelParams = [ "radeon.cik_support=0" "amdgpu.cik_support=1" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "amdgpu" "radeon" ];
+  #boot.initrd.kernelModules = [ "amdgpu" ];
+  #boot.kernelParams = [ "radeon.cik_support=0" "amdgpu.cik_support=1" ];
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
   boot.plymouth.enable = true;
   boot.plymouth.theme = "breeze";
+
+  hardware.amdgpu.legacySupport.enable = true;
 
   powerManagement.cpuFreqGovernor = "schedutil";
 
@@ -40,7 +42,7 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   # hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [ ];
   };

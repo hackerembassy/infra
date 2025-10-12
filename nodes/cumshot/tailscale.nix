@@ -24,7 +24,7 @@
       oidc = {
 	client_id = "x6Ji5XAWjYIl93mA4YBGvTpPRKc8Aw53CxYq6FPo";
 	client_secret_path = "/secrets/headscale-oidc-secret";
-	strip_email_domain = true;
+	#strip_email_domain = true;
 	scope = [
 	  "openid"
 	  "profile"
@@ -34,7 +34,7 @@
       };
       dns = {
         magic_dns = true;
-        #nameservers.global = [ "1.1.1.1" "1.0.0.1" "2606:4700:4700::1111" "2606:4700:4700::1001" ];
+        nameservers.global = [ "1.1.1.1" "1.0.0.1" "2606:4700:4700::1111" "2606:4700:4700::1001" ];
         base_domain = "xkem.am";
         search_domains = [
           "lan"

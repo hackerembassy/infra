@@ -20,7 +20,7 @@
     rpi-nix.url = "github:nix-community/raspberry-pi-nix";
     # rpi-nix.inputs.nixpkgs.follows = "nixpkgs";
 
-    printit.url = "github:cab404/printit/nix";
+    printit.url = "github:adipierro/printit/nix";
     printit.inputs.nixpkgs.follows = "nixpkgs";
 
     printer-anette = {
