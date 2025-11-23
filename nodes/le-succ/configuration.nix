@@ -8,7 +8,7 @@
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./fluidscreen.nix
+      # ./fluidscreen.nix
       ./users.nix
       ./klipper.nix
       "${inputs.self}/modules/home-manager"

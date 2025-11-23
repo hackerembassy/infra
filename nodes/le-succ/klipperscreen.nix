@@ -2,7 +2,10 @@
 let
   on = { enable = true; };
   iface = "enp0s16u1";
-  conf = builtins.toFile "KlipperConfig.conf" ''
+  conf = builtins.toFile "KlipperScreen.conf" ''
+    [main]
+    use_dpms: False
+
     [printer Anette]
     moonraker_host: localhost
     moonraker_port: 7125
@@ -13,7 +16,7 @@ in
 
 {
   systemd.services.klipperscreen = {
-    path = with pkgs; [ klipperscreen iproute2 ];
+    path = with pkgs; [ klipperscreen iproute2 xorg.xset xorg.xsetroot ];
     script = ''
       export DISPLAY=$(ip r show dev ${iface} default | cut -d ' ' -f3):0
       echo "--- starting at DISPLAY=$DISPLAY ---"
