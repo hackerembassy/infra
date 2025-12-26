@@ -3,7 +3,7 @@
   services.tailscale.enable = true;
   systemd.services.headscale = {
     # It is dumb-ish
-    serviceConfig.TimeoutStopSec = 10;
+    #serviceConfig.TimeoutStopSec = 10;
     environment = {
       HEADSCALE_EXPERIMENTAL_FEATURE_SSH = "1";
     };
