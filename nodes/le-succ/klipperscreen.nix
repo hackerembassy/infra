@@ -1,15 +1,14 @@
 { config, pkgs, prelude, ... }@args:
 let
   on = { enable = true; };
-  iface = "enp0s16u2";
-  conf = builtins.toFile "KlipperConfig.conf" ''
+  iface = "enp0s16u1";
+  conf = builtins.toFile "KlipperScreen.conf" ''
+    [main]
+    use_dpms: False
+
     [printer Anette]
     moonraker_host: localhost
     moonraker_port: 7125
-
-    [printer Plumbus]
-    moonraker_host: printer-plumbus.lan
-    moonraker_port: 7125 
   '';
 in
 
@@ -17,11 +16,11 @@ in
 
 {
   systemd.services.klipperscreen = {
-    path = with pkgs; [ klipperscreen iproute2 ];
+    path = with pkgs; [ klipperscreen iproute2 xorg.xset xorg.xsetroot ];
     script = ''
       export DISPLAY=$(ip r show dev ${iface} default | cut -d ' ' -f3):0
-      echo Starting at $DISPLAY
-      KlipperScreen -c ${conf}
+      echo "--- starting at DISPLAY=$DISPLAY ---"
+      KlipperScreen -c ${conf} -l -
     '';
     enable = true;
     after = [ "moonraker.service" "sys-subsystem-net-devices-${iface}.device" ];
@@ -30,6 +29,7 @@ in
     requires = [ "sys-subsystem-net-devices-${iface}.device" ];
     wantedBy = [ "sys-subsystem-net-devices-${iface}.device" ];
     serviceConfig.Restart = "always";
+    serviceConfig.RestartSec = "10";
   };
 
   # systemd.services.klipperscreen-out = {

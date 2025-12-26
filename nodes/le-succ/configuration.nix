@@ -8,7 +8,7 @@
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./fluidscreen.nix
+      # ./fluidscreen.nix
       ./users.nix
       ./klipper.nix
       "${inputs.self}/modules/home-manager"
@@ -95,8 +95,10 @@
   services.go2rtc = {
     enable = true;
     settings = {
+      api = {
+        origin = "*";
+      };
       streams = {
-        #cam = "ffmpeg:device?video=/dev/video0&input_format=mjpeg&video_size=320x240&codec=copy&container=mpegts";
         cam = "ffmpeg:device?video=/dev/video0&input_format=yuyv422&video_size=1280x720#video=h264#hardware";
       };
       ffmpeg.bin = "${pkgs.ffmpeg_6-full}/bin/ffmpeg";

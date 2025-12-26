@@ -1,6 +1,12 @@
 Example deploy-rs infra
 ====
 
+## How to rebuild-switch a host
+
+```sh
+nixos-rebuild switch -v --flake . --target-host root@le-succ
+```
+
 ## Nodes
 
 ### example-node
