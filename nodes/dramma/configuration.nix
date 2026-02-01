@@ -57,6 +57,7 @@
     libva-utils
     htop
     python312
+    python312Packages.pip
     (chromium.override {
       commandLineArgs = [
         "--enable-features=AcceleratedVideoEncoder,VaapiOnNvidiaGPUs,VaapiIgnoreDriverChecks,Vulkan,DefaultANGLEVulkan,VulkanFromANGLE"
