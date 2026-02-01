@@ -17,6 +17,7 @@
   users.users.tv = {  
       shell = pkgs.zsh;
       isNormalUser = true;
+      extraGroups = [ "dialout" ];  
       packages = with pkgs; [  
       ];
   };
