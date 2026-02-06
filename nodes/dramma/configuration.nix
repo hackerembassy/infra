@@ -39,9 +39,15 @@
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
-  # Enable sound via PipeWire.
-  sound.enable = true;
-  services.pipewire.enable = true;
+  # Enable sound
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    pulse.enable = true;
+    audio.enable = true;
+  };
+  
+  security.rtkit.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
