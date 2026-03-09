@@ -13,7 +13,7 @@ in
     group = "klipper";
   };
 
-  users.groups.klipper = { };
+  users.groups.klipper = {};
 
   security.polkit = on;
 
@@ -33,6 +33,7 @@ in
       };
     };
   };
+   systemd.services.klipper.serviceConfig.ExecStart = pkgs.lib.mkForce "/nix/store/v4n4sj7sab3g4p3ll0icvc462vj63nj3-klipper-0.13.0-unstable-2025-11-17/bin/klippy --input-tty=/run/klipper/tty --api-server=/run/klipper/api -l /var/lib/klipper/logs/klippy.log /var/lib/klipper/config/printer.cfg";
 
   services.moonraker = on // {
     user = "klipper";
@@ -41,18 +42,26 @@ in
     allowSystemControl = true;
     stateDir = "/var/lib/klipper";
     settings = {
-      authorization = {
-        cors_domains = [
-          "http://${config.networking.hostName}"
-          "http://${config.networking.hostName}.lan"
-          "http://${config.networking.hostName}.local"
-          "http://localhost"
-          "http://app.fluidd.xyz"
-          "http://my.mainsail.xyz"
-          "http://le-fail.lan"
-          "http://printer-anette.lan"
-        ];
-        trusted_clients = [ "0.0.0.0/0" "::0/0" ];
+	server = {
+	  log_path = "var/lib/klipper/logs";
+	          };
+        authorization = {
+          cors_domains = [
+            "http://${config.networking.hostName}"
+            "http://${config.networking.hostName}.lan"
+            "http://${config.networking.hostName}.local"
+            "http://localhost"
+            "http://app.fluidd.xyz"
+            "http://my.mainsail.xyz"
+	    "http://le-fail.lan"
+	    "http://printer-anette.lan"
+          ];
+          trusted_clients = [ "0.0.0.0/0" "::0/0" ];
+        };
+        file_manager = {
+          enable_object_processing = "False";
+        };
+        octoprint_compat = { };
       };
       file_manager = {
         enable_object_processing = "False";
@@ -74,5 +83,4 @@ in
     enable = true;
     after = [ "network.target" ];
   };
-
 }
