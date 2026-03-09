@@ -53,8 +53,8 @@ in
             "http://localhost"
             "http://app.fluidd.xyz"
             "http://my.mainsail.xyz"
-	    "http://le-fail.lan"
-	    "http://printer-anette.lan"
+	          "http://le-fail.lan"
+	          "http://printer-anette.lan"
           ];
           trusted_clients = [ "0.0.0.0/0" "::0/0" ];
         };
@@ -63,11 +63,6 @@ in
         };
         octoprint_compat = { };
       };
-      file_manager = {
-        enable_object_processing = "False";
-      };
-      octoprint_compat = { };
-    };
   };
   services.fluidd = on // {
     nginx = {
