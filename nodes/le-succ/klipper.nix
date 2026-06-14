@@ -33,7 +33,11 @@ in
       };
     };
   };
-   systemd.services.klipper.serviceConfig.ExecStart = pkgs.lib.mkForce "/nix/store/v4n4sj7sab3g4p3ll0icvc462vj63nj3-klipper-0.13.0-unstable-2025-11-17/bin/klippy --input-tty=/run/klipper/tty --api-server=/run/klipper/api -l /var/lib/klipper/logs/klippy.log /var/lib/klipper/config/printer.cfg";
+  systemd.services.klipper = {
+    restartIfChanged = false;
+    stopIfChanged = false;
+    serviceConfig.ExecStart = pkgs.lib.mkForce "/nix/store/v4n4sj7sab3g4p3ll0icvc462vj63nj3-klipper-0.13.0-unstable-2025-11-17/bin/klippy --input-tty=/run/klipper/tty --api-server=/run/klipper/api -l /var/lib/klipper/logs/klippy.log /var/lib/klipper/config/printer.cfg";
+  };
 
   services.moonraker = on // {
     user = "klipper";
