@@ -42,9 +42,6 @@ in
     allowSystemControl = true;
     stateDir = "/var/lib/klipper";
     settings = {
-	server = {
-	  log_path = "var/lib/klipper/logs";
-	          };
         authorization = {
           cors_domains = [
             "http://${config.networking.hostName}"
