@@ -1,7 +1,7 @@
 { config, pkgs, prelude, ... }@args:
 let
   on = { enable = true; };
-  iface = "enp0s16u1";
+  iface = "enp0s16u2";
   conf = builtins.toFile "KlipperScreen.conf" ''
     [main]
     use_dpms: False
