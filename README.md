@@ -19,9 +19,6 @@ nixos-rebuild switch -v --flake . --target-host root@le-succ
 | directory   | function                                                                                                           |
 |-------------|--------------------------------------------------------------------------------------------------------------------|
 | ./nodes     | Node configurations, automatically mapped over and deployed.                                                       |
-| ./terraform | Terraform files, yes.                                                                                              |
-| ./compose   | Docker compose files, oh no.                                                                                       |
 | ./common    | Contains common configuration across all the nodes in this repo                                                    |
 | ./secrets   | Per-node secrets, secrets/%hostname%/* send them via `./scripts/send-secrets.sh` or `make send-secrets/%hostname%` |
-|             |                                                                                                                    |
 |             |                                                                                                                    |
